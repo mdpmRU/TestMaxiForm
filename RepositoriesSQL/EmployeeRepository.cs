@@ -25,7 +25,7 @@ namespace RepositoriesSQL
         }
 
         public void Update(Position entity)
-        {z
+        {
         }
 
         public void DeleteById(int id)
