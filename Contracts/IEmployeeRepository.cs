@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
-    public interface IEmployeeRepository : IRepository<Employee>
+    public interface IEmployeeRepository : IBaseRepository<Employee>
     {
         public IEnumerable<Employee> GetByLastName(string lastName);
     }

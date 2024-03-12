@@ -12,25 +12,28 @@ namespace RepositoriesSQL
     {
         public IEnumerable<Department> GetAll()
         {
-
             yield break;
         }
 
         public Department GetById(int id)
         {
+            string command = $"SELECT * FROM {TableNameDepartments} WHERE ID = {id};";
             return null;
         }
 
         public void Insert(Department entity)
         {
+
         }
 
         public void Update(Department entity)
         {
+
         }
 
         public void DeleteById(int id)
         {
+
         }
     }
 }

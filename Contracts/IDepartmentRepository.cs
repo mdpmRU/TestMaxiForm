@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
-    public interface IDepartmentRepository : IRepository<Department>
+    public interface IDepartmentRepository : IBaseRepository<Department>
     {
     }
 }

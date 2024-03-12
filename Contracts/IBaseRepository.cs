@@ -2,7 +2,7 @@
 
 namespace Contracts
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IBaseRepository<T> where T : BaseEntity
     {
         public IEnumerable<T> GetAll();
 

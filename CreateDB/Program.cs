@@ -1,7 +1,7 @@
 ﻿using Create;
 using TestData;
 //"административная" программа для добавления данных
-var dbName = "TestMaxiForm6";
+var dbName = "TestMaxiForm7";
 SqlCommands sql = new(dbName);
 sql.DropDataBase();
 sql.CreateDataBase();

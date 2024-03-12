@@ -12,11 +12,13 @@ namespace RepositoriesSQL
     {
         public IEnumerable<Position> GetAll()
         {
-            yield break;
+            string command = $"SELECT * FROM {TableNamePositions} WHERE ID = {id};";
         }
 
         public Position GetById(int id)
         {
+            string command = $"SELECT * FROM {TableNamePositions} WHERE ID = {id};";
+            ExecuteQueriWithData(command);
             return null;
         }
 
