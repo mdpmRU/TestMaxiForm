@@ -8,10 +8,11 @@ using Entities;
 
 namespace RepositoriesSQL
 {
-    public class DepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository : BaseRepository, IDepartmentRepository
     {
         public IEnumerable<Department> GetAll()
         {
+
             yield break;
         }
 

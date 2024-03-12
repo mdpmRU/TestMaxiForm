@@ -8,7 +8,7 @@ using Entities;
 
 namespace RepositoriesSQL
 {
-    public class PositionRepository : IPositionRepository
+    public class PositionRepository : BaseRepository, IPositionRepository
     {
         public IEnumerable<Position> GetAll()
         {

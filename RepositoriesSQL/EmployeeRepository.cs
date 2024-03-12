@@ -8,28 +8,33 @@ using Entities;
 
 namespace RepositoriesSQL
 {
-    public class EmployeeRepository: IPositionRepository
+    public class EmployeeRepository: BaseRepository, IEmployeeRepository
     {
-        public IEnumerable<Position> GetAll()
+        public IEnumerable<Employee> GetAll()
         {
             yield break;
         }
 
-        public Position GetById(int id)
+        public Employee GetById(int id)
         {
             return null;
         }
 
-        public void Insert(Position entity)
+        public void Insert(Employee entity)
         {
         }
 
-        public void Update(Position entity)
+        public void Update(Employee entity)
         {
         }
 
         public void DeleteById(int id)
         {
+        }
+
+        public IEnumerable<Employee> GetByLastName(string lastName)
+        {
+            yield break;
         }
     }
 }
