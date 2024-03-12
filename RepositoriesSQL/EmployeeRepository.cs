@@ -26,7 +26,7 @@ namespace RepositoriesSQL
                               JOIN [dbo].[Departments] ON [dbo].[{TableNameEmployees}].[DepartmentID] = [dbo].[Departments].[ID]
                               JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
                               """;
-            var result = ExecuteQueriWithData(command).Rows;
+            var result = ExecuteQueryWithData(command).Rows;
             var list = new List<Employee>();
             foreach (DataRow row in result)
             {
@@ -50,7 +50,7 @@ namespace RepositoriesSQL
                               JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
                               WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id}
                               """;
-            var result = ExecuteQueriWithData(command).Rows[0].ItemArray;
+            var result = ExecuteQueryWithData(command).Rows[0].ItemArray;
             return new Employee
             {
                 Id = Int32.Parse(result[0].ToString()),
@@ -84,7 +84,7 @@ namespace RepositoriesSQL
                              EXECUTE [dbo].[FindByLastName]
                                 '{lastName}'
                              """;
-            var result = ExecuteQueriWithData(command).Rows;
+            var result = ExecuteQueryWithData(command).Rows;
             var list = new List<Employee>();
             foreach (DataRow row in result)
             {

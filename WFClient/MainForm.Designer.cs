@@ -47,12 +47,12 @@
             btn_Insert_Position = new Button();
             btn_GetById_Position = new Button();
             btn_GetAll_Position = new Button();
-            dataGridView1 = new DataGridView();
+            MainDataGridView = new DataGridView();
             MainTextBox = new TextBox();
             gb_Employees.SuspendLayout();
             gb_Departments.SuspendLayout();
             gb_Positions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)MainDataGridView).BeginInit();
             SuspendLayout();
             // 
             // gb_Employees
@@ -258,13 +258,13 @@
             btn_GetAll_Position.UseVisualStyleBackColor = true;
             btn_GetAll_Position.Click += btn_GetAll_Position_Click;
             // 
-            // dataGridView1
+            // MainDataGridView
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 214);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(612, 224);
-            dataGridView1.TabIndex = 3;
+            MainDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            MainDataGridView.Location = new Point(12, 214);
+            MainDataGridView.Name = "MainDataGridView";
+            MainDataGridView.Size = new Size(612, 224);
+            MainDataGridView.TabIndex = 3;
             // 
             // MainTextBox
             // 
@@ -279,7 +279,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(634, 450);
             Controls.Add(MainTextBox);
-            Controls.Add(dataGridView1);
+            Controls.Add(MainDataGridView);
             Controls.Add(gb_Positions);
             Controls.Add(gb_Departments);
             Controls.Add(gb_Employees);
@@ -288,7 +288,7 @@
             gb_Employees.ResumeLayout(false);
             gb_Departments.ResumeLayout(false);
             gb_Positions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)MainDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -314,7 +314,7 @@
         private Button btn_Delete_Position;
         private Button btn_Update_Position;
         private Button btn_Insert_Position;
-        private DataGridView dataGridView1;
+        private DataGridView MainDataGridView;
         private TextBox MainTextBox;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Diagnostics;
 
 namespace RepositoriesSQL
 {
@@ -9,7 +10,7 @@ namespace RepositoriesSQL
         internal const string TableNamePositions = "Positions";
         internal const string TableNameDepartments = "Departments";
         internal const string TableNameEmployees = "Employees";
-        internal DataTable ExecuteQueriWithData(string query)
+        internal DataTable ExecuteQueryWithData(string query)
         {
             var ds = new DataSet();
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -19,6 +20,20 @@ namespace RepositoriesSQL
                 adapter.Fill(ds);
             }
             return ds.Tables[0];
+        }
+
+        internal void Execute(string query)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                int number = command.ExecuteNonQuery();
+                if (number != 0)
+                {
+                    Debug.WriteLine("Операция проведена");
+                }
+            }
         }
     }
 }

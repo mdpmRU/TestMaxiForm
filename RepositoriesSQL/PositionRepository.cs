@@ -10,7 +10,7 @@ namespace RepositoriesSQL
         public IEnumerable<Position> GetAll()
         {
             string command = $"SELECT * FROM {TableNamePositions};";
-            var result = ExecuteQueriWithData(command).Rows;
+            var result = ExecuteQueryWithData(command).Rows;
             var list = new List<Position>();
             foreach (DataRow row in result)
             {
@@ -22,21 +22,29 @@ namespace RepositoriesSQL
         public Position GetById(int id)
         {
             string command = $"SELECT * FROM {TableNamePositions} WHERE ID = {id};";
-            var result = ExecuteQueriWithData(command).Rows[0];
+            var result = ExecuteQueryWithData(command).Rows[0];
             return ParsePosition(result);
         }
 
         public void Insert(Position entity)
         {
-
+            string command = $"INSERT {TableNamePositions} VALUES ('{entity.Name}')";
+            Execute(command);
         }
 
         public void Update(Position entity)
         {
+            string command = $"""
+                              UPDATE {TableNamePositions}
+                              SET DepartmentName = '{entity.Name}' WHERE ID = {entity.Id}
+                              """;
+            Execute(command);
         }
 
         public void DeleteById(int id)
         {
+            string command = $"DELETE FROM {TableNamePositions} WHERE ID = {id}";
+            Execute(command);
         }
 
         private Position ParsePosition(DataRow result)

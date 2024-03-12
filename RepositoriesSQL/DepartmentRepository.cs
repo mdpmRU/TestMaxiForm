@@ -13,29 +13,42 @@ namespace RepositoriesSQL
     {
         public IEnumerable<Department> GetAll()
         {
-            yield break;
+            string command = $"SELECT * FROM {TableNamePositions};";
+            var result = ExecuteQueryWithData(command).Rows;
+            var list = new List<Department>();
+            foreach (DataRow row in result)
+            {
+                list.Add(ParseDepartment(row));
+            }
+            return list;
         }
 
         public Department GetById(int id)
         {
             string command = $"SELECT * FROM {TableNameDepartments} WHERE ID = {id};";
-            var result = ExecuteQueriWithData(command).Rows[0];
+            var result = ExecuteQueryWithData(command).Rows[0];
             return ParseDepartment(result);
         }
 
         public void Insert(Department entity)
         {
-
+            string command = $"INSERT {TableNameDepartments} VALUES ('{entity.Name}')";
+            Execute(command);
         }
 
         public void Update(Department entity)
         {
-
+            string command = $"""
+                              UPDATE {TableNameDepartments}
+                              SET DepartmentName = '{entity.Name}' WHERE ID = {entity.Id}
+                              """;
+            Execute(command);
         }
 
         public void DeleteById(int id)
         {
-
+            string command = $"DELETE FROM {TableNameDepartments} WHERE ID = {id}";
+            Execute(command);
         }
 
         private Department ParseDepartment(DataRow result)
