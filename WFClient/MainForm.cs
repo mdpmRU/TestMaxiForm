@@ -75,17 +75,18 @@ namespace WFClient
         #region Employees
         private void btn_GetAll_Employees_Click(object sender, EventArgs e)
         {
-
+            var list = service.GetAllEmployees();
         }
 
         private void btn_GetByID_Employee_Click(object sender, EventArgs e)
         {
-
+            var item = service.GetEmployeeById(1);
         }
 
         private void btn_getByLastName_Employee_Click(object sender, EventArgs e)
         {
-
+            string lastName= "FirstLastName";
+            var items = service.GetbyLastNameEmployees(lastName);
         }
 
         private void btn_Insert_Employee_Click(object sender, EventArgs e)

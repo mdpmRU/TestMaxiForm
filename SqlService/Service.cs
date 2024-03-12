@@ -75,6 +75,11 @@ namespace DataService
             return _employeeRepository.GetAll();
         }
 
+        public IEnumerable<Employee> GetbyLastNameEmployees(string lastName)
+        {
+            return _employeeRepository.GetByLastName(lastName);
+        }
+
         public void InsertEmployee(Employee employee)
         {
 

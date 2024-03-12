@@ -27,7 +27,6 @@ namespace Create
         public async void CreateTables()
         {
             var command = $"""
-                                   USE {dbName}
                                    CREATE TABLE Departments (
                                    ID INT PRIMARY KEY IDENTITY,
                                    DepartmentName NVARCHAR(50)
@@ -37,7 +36,7 @@ namespace Create
                                    PositionName NVARCHAR(50)
                                    );
                                    CREATE TABLE Employees (
-                                   ID INT PRIMARY KEY IDENTITY,
+                                   EmployeeID INT PRIMARY KEY IDENTITY,
                                    FirstName NVARCHAR(50),
                                    LastName NVARCHAR(50),
                                    Email NVARCHAR(100),
@@ -72,16 +71,25 @@ namespace Create
 
         public async void CreateStoreProcedure()
         {
-            string command = $"""
-                                   CREATE PROCEDURE TestLike
-                                   @lastName NVARCHAR(50)
-                                   AS
+            string command = """
+                             CREATE PROCEDURE FindByLastName
+                             @lastName NVARCHAR(50)
+                             AS
 
-                                   BEGIN
-                                   	SELECT * FROM Employees
-                                   	WHERE LastName LIKE @lastName
-                                   END;
-                                   """;
+                             BEGIN
+                             SELECT [EmployeeID]
+                                   ,[FirstName]
+                                   ,[LastName]
+                                   ,[Email]
+                                   ,[DateOfBirth]
+                                   ,[dbo].[Departments].[DepartmentName]
+                                   ,[dbo].[Positions].[PositionName]
+                               FROM [dbo].[Employees]
+                             JOIN [dbo].[Departments] ON [dbo].[Employees].[DepartmentID] = [dbo].[Departments].[ID]
+                             JOIN [dbo].[Positions] ON [dbo].[Employees].[PositionID] = [dbo].[Positions].[ID]
+                             WHERE [dbo].[Employees].[LastName] LIKE @lastName
+                             END
+                             """;
             string goodResult = "Хранимая процедура успешно создана";
             await ExecuteRequest(command, goodResult, false);
         }
