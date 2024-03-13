@@ -87,7 +87,7 @@ namespace DataService
 
         public void InsertEmployee(Employee employee)
         {
-
+            _employeeRepository.Insert(employee);
         }
 
         public void UpdateEmployee(Employee employee)
@@ -97,7 +97,7 @@ namespace DataService
 
         public void DeleteEmployeeById(int id)
         {
-
+            _employeeRepository.DeleteById(id);
         }
         #endregion
 

@@ -27,16 +27,48 @@ namespace WFClient.HelperForms
             tb_Name.Text = employee.Name;
             tb_LastName.Text = employee.LastName;
             tb_Email.Text = employee.Email;
-            dt_DayBirth.Value = employee.DateOfBirth.Date;
-
+            if (employee.DateOfBirth == DateTime.MinValue)
+            {
+                dt_DayBirth.Value = DateTime.Now;
+            }
+            else
+            {
+                dt_DayBirth.Value = employee.DateOfBirth.Date;
+            }
 
             cb_Depatments.DataSource = _departments;
-            cb_Depatments.SelectedIndex = employee.Department.Id;
+            if (employee.Department == null)
+            {
+                new Department
+                {
+                    Id = 0,
+                    Name = "Добавьте отдел"
+                };
+            }
+            else
+            {
+                
+                cb_Depatments.SelectedIndex = employee.Department.Id;
+                cb_Depatments.DisplayMember = "Name";
+            }
             cb_Depatments.DisplayMember = "Name";
 
             cb_Position.DataSource = _positions;
-            cb_Position.SelectedIndex = employee.Position.Id;
+            if (employee.Position == null)
+            {
+                new Department
+                {
+                    Id = 0,
+                    Name = "Добавьте должность"
+                };
+            }
+            else
+            {
+                
+                cb_Position.SelectedIndex = employee.Position.Id;
+            }
             cb_Position.DisplayMember = "Name";
+
         }
 
         private void btn_Ok_Click(object sender, EventArgs e)

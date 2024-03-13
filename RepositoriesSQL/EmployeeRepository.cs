@@ -53,7 +53,11 @@ namespace RepositoriesSQL
 
         public void Insert(Employee entity)
         {
-
+            string command = $"""
+                             INSERT {TableNameEmployees} VALUES
+                             ('{entity.Name}','{entity.LastName}','{entity.Email}','{entity.DateOfBirth.Date}',{entity.Department.Id},{entity.Position.Id})
+                             """;
+            Execute(command);
         }
 
         public void Update(Employee entity)
@@ -73,7 +77,11 @@ namespace RepositoriesSQL
 
         public void DeleteById(int id)
         {
-
+            string command = $"""
+                              DELETE FROM {TableNameEmployees}
+                              WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id}
+                              """;
+            Execute(command);
         }
 
         public IEnumerable<Employee> GetByLastName(string lastName)

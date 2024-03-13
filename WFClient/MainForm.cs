@@ -114,13 +114,27 @@ namespace WFClient
 
         private void btn_getByLastName_Employee_Click(object sender, EventArgs e)
         {//TODO Добавить проверку на ввод данных
-            string lastName= "FirstLastName";
+            string lastName = MainTextBox.Text;
             var items = service.GetbyLastNameEmployees(lastName);
+            DisplayEmployees(items);
         }
 
         private void btn_Insert_Employee_Click(object sender, EventArgs e)
         {
-
+            InputEmployeeForm edEmployeeForm = new InputEmployeeForm(new Employee(), service.GetAllPosition(), service.GetAllDepartments());
+            DialogResult result = edEmployeeForm.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+            if (result == DialogResult.OK)
+            {
+                service.InsertEmployee(edEmployeeForm.ResultEmployee);
+            }
+            else
+            {
+                MessageBox.Show("Что-то не так");
+            }
         }
 
         private void btn_Update_Employee_Click(object sender, EventArgs e)
@@ -136,8 +150,7 @@ namespace WFClient
             }
             if(result == DialogResult.OK)
             {
-                var a = edEmployeeForm.ResultEmployee;
-                service.UpdateEmployee(a);
+                service.UpdateEmployee(edEmployeeForm.ResultEmployee);
             }
             else
             {
@@ -147,6 +160,8 @@ namespace WFClient
 
         private void btn_Delete_Employee_Click(object sender, EventArgs e)
         {
+            var id = int.Parse(MainDataGridView.CurrentCell.Value.ToString());
+            service.DeleteEmployeeById(id);
         }
         #endregion
 
