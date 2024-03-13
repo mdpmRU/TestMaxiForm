@@ -50,17 +50,17 @@ namespace DataService
 
         public void InsertDepartment(Department department)
         {
-
+            _departmentRepository.Insert(department);
         }
 
         public void UpdateDepartment(Department department)
         {
-
+            _departmentRepository.Update(department);
         }
 
         public void DeleteDepartmentsById(int id)
         {
-
+            _departmentRepository.DeleteById(id);
         }
         #endregion
 

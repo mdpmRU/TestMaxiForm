@@ -24,8 +24,8 @@ namespace RepositoriesSQL
                                     ,[dbo].[Departments].[DepartmentName]
                                     ,[dbo].[Positions].[PositionName]
                                 FROM [dbo].[{TableNameEmployees}]
-                              JOIN [dbo].[Departments] ON [dbo].[{TableNameEmployees}].[DepartmentID] = [dbo].[Departments].[ID]
-                              JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
+                              LEFT JOIN [dbo].[Departments] ON [dbo].[{TableNameEmployees}].[DepartmentID] = [dbo].[Departments].[ID]
+                              LEFT JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
                               """;
             var result = ExecuteQueryWithData(command).Rows;
             return (from DataRow row in result select Parse(row)).ToList();
@@ -46,7 +46,6 @@ namespace RepositoriesSQL
                               JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
                               WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id}
                               """;
-            //TODO Добавить проверку на Null
             var queryResult = ExecuteQueryWithData(command);
             if (queryResult.Rows.Count != 0)
             {
@@ -107,8 +106,15 @@ namespace RepositoriesSQL
                               SELECT * FROM {TableNameEmployees}
                               WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id};
                               """;
-            var result = ExecuteQueryWithData(command).Rows[0];
-            return Parse(result);
+            var queryResult = ExecuteQueryWithData(command);
+            if (queryResult.Rows.Count != 0)
+            {
+                return Parse(queryResult.Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         private Employee Parse(DataRow result)

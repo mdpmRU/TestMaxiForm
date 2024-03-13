@@ -27,7 +27,7 @@ namespace WFClient
             set
             {
                 displayValueType = value;
-                BlockButtons(value);
+                //BlockButtons(value);
             }
         }
 
@@ -52,17 +52,17 @@ namespace WFClient
 
         private void btn_Insert_Position_Click(object sender, EventArgs e)
         {
-
+            ParseIdTb();
         }
 
         private void btn_Update_Position_Click(object sender, EventArgs e)
         {
-
+            ParseIdTb();
         }
 
         private void btn_Delete_Position_Click(object sender, EventArgs e)
         {
-
+            service.DeletePositionById(ParseIdTb());
         }
         #endregion
 
@@ -74,24 +74,23 @@ namespace WFClient
         }
         private void btn_GetById_Department_Click(object sender, EventArgs e)
         {//TODO Добавить проверку на ввод данных
-            ParseIdTb();
+            var item = service.GetDepartmentById(ParseIdTb());
+            DisplayDepartments(new List<Department> { item });
         }
 
         private void btn_Insert_Department_Click(object sender, EventArgs e)
         {
+            ParseIdTb();
         }
 
         private void btn_Update_Department_Click(object sender, EventArgs e)
         {
-            if (displayValueType == DataGridViewHelper.Department)
-            {
-
-            }
+            ParseIdTb();
         }
 
         private void btn_Delete_Department_Click(object sender, EventArgs e)
         {
-
+            service.DeleteDepartmentsById(ParseIdTb());
         }
 
         #endregion
@@ -137,22 +136,30 @@ namespace WFClient
         private void btn_Update_Employee_Click(object sender, EventArgs e)
         {
             //TODO Добавить выбор по строке
-            var id = int.Parse(MainDataGridView.CurrentCell.Value.ToString());
-
-            InputEmployeeForm edEmployeeForm = new InputEmployeeForm(service.GetByIdOnlyEmployee(id), service.GetAllPosition(),service.GetAllDepartments());
-            DialogResult result = edEmployeeForm.ShowDialog();
-            if (result == DialogResult.Cancel)
+            var id = ParseIdTb();
+            var employee = service.GetByIdOnlyEmployee(id);
+            if (employee == null)
             {
-                return;
-            }
-            if(result == DialogResult.OK)
-            {
-                service.UpdateEmployee(edEmployeeForm.ResultEmployee);
+                MessageBox.Show("Пользователь не найден");
             }
             else
             {
-                MessageBox.Show("Что-то не так");
+                InputEmployeeForm edEmployeeForm = new InputEmployeeForm(employee, service.GetAllPosition(), service.GetAllDepartments());
+                DialogResult result = edEmployeeForm.ShowDialog();
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+                if (result == DialogResult.OK)
+                {
+                    service.UpdateEmployee(edEmployeeForm.ResultEmployee);
+                }
+                else
+                {
+                    MessageBox.Show("Что-то не так");
+                }
             }
+
         }
 
         private void btn_Delete_Employee_Click(object sender, EventArgs e)
@@ -222,68 +229,75 @@ namespace WFClient
 
             foreach (var entity in list)
             {
-                dataTable.Rows.Add(entity.Id, entity.Name);
+                if (entity != null)
+                {
+                    dataTable.Rows.Add(entity.Id, entity.Name);
+                }
+                else
+                {
+                    MessageBox.Show("Данные не найдены");
+                }
             }
             DisplayValueType = DataGridViewHelper.Department;
             MainDataGridView.DataSource = dataTable;
         }
 
-        private void BlockButtons(DataGridViewHelper value)
-        {
-            if (value == DataGridViewHelper.Default)
-            {
-                btn_GetAll_Departments.Enabled = true;
-                btn_GetAll_Position.Enabled = true;
-                btn_GetAll_Employees.Enabled = true;
+        //private void BlockButtons(DataGridViewHelper value)
+        //{
+        //    if (value == DataGridViewHelper.Default)
+        //    {
+        //        btn_GetAll_Departments.Enabled = true;
+        //        btn_GetAll_Position.Enabled = true;
+        //        btn_GetAll_Employees.Enabled = true;
 
-                btn_GetById_Department.Enabled = true;
-                btn_GetById_Position.Enabled = true;
-                btn_GetByID_Employee.Enabled = true;
-                btn_getByLastName_Employee.Enabled = true;
+        //        btn_GetById_Department.Enabled = true;
+        //        btn_GetById_Position.Enabled = true;
+        //        btn_GetByID_Employee.Enabled = true;
+        //        btn_getByLastName_Employee.Enabled = true;
 
-                btn_Insert_Employee.Enabled = true;
-                btn_Insert_Position.Enabled = true;
-                btn_Insert_Department.Enabled = true;
+        //        btn_Insert_Employee.Enabled = true;
+        //        btn_Insert_Position.Enabled = true;
+        //        btn_Insert_Department.Enabled = true;
 
-                btn_Update_Employee.Enabled = false;
-                btn_Delete_Employee.Enabled = false;
-                btn_Update_Position.Enabled = false;
-                btn_Delete_Position.Enabled = false;
-                btn_Update_Department.Enabled = false;
-                btn_Delete_Department.Enabled = false;
-            }
-            if (value == DataGridViewHelper.Employee)
-            {
-                btn_Update_Employee.Enabled = true;
-                btn_Update_Position.Enabled = false;
-                btn_Update_Department.Enabled = false;
+        //        btn_Update_Employee.Enabled = false;
+        //        btn_Delete_Employee.Enabled = false;
+        //        btn_Update_Position.Enabled = false;
+        //        btn_Delete_Position.Enabled = false;
+        //        btn_Update_Department.Enabled = false;
+        //        btn_Delete_Department.Enabled = false;
+        //    }
+        //    if (value == DataGridViewHelper.Employee)
+        //    {
+        //        btn_Update_Employee.Enabled = true;
+        //        btn_Update_Position.Enabled = false;
+        //        btn_Update_Department.Enabled = false;
 
-                btn_Delete_Employee.Enabled = true;
-                btn_Delete_Position.Enabled = false;
-                btn_Delete_Department.Enabled = false;
-            }
-            if (value == DataGridViewHelper.Department)
-            {
-                btn_Update_Employee.Enabled = false;
-                btn_Update_Position.Enabled = false;
-                btn_Update_Department.Enabled = true;
+        //        btn_Delete_Employee.Enabled = true;
+        //        btn_Delete_Position.Enabled = false;
+        //        btn_Delete_Department.Enabled = false;
+        //    }
+        //    if (value == DataGridViewHelper.Department)
+        //    {
+        //        btn_Update_Employee.Enabled = false;
+        //        btn_Update_Position.Enabled = false;
+        //        btn_Update_Department.Enabled = true;
 
-                btn_Delete_Employee.Enabled = false;
-                btn_Delete_Position.Enabled = false;
-                btn_Delete_Department.Enabled = true;
-            }
+        //        btn_Delete_Employee.Enabled = false;
+        //        btn_Delete_Position.Enabled = false;
+        //        btn_Delete_Department.Enabled = true;
+        //    }
 
-            if (value == DataGridViewHelper.Position)
-            {
-                btn_Update_Employee.Enabled = false;
-                btn_Update_Position.Enabled = true;
-                btn_Update_Department.Enabled = false;
+        //    if (value == DataGridViewHelper.Position)
+        //    {
+        //        btn_Update_Employee.Enabled = false;
+        //        btn_Update_Position.Enabled = true;
+        //        btn_Update_Department.Enabled = false;
 
-                btn_Delete_Employee.Enabled = false;
-                btn_Delete_Position.Enabled = true;
-                btn_Delete_Department.Enabled = false;
-            }
-        }
+        //        btn_Delete_Employee.Enabled = false;
+        //        btn_Delete_Position.Enabled = true;
+        //        btn_Delete_Department.Enabled = false;
+        //    }
+        //}
 
         private int ParseIdTb()
         {
