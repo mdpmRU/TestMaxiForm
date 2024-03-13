@@ -128,11 +128,20 @@ namespace WFClient
             //TODO Добавить выбор по строке
             var id = int.Parse(MainDataGridView.CurrentCell.Value.ToString());
 
-            InputEmployee edEmployee = new InputEmployee(service.GetByIdOnlyEmployee(id), service.GetAllPosition(),service.GetAllDepartments());
-            DialogResult result = edEmployee.ShowDialog();
+            InputEmployeeForm edEmployeeForm = new InputEmployeeForm(service.GetByIdOnlyEmployee(id), service.GetAllPosition(),service.GetAllDepartments());
+            DialogResult result = edEmployeeForm.ShowDialog();
             if (result == DialogResult.Cancel)
             {
                 return;
+            }
+            if(result == DialogResult.OK)
+            {
+                var a = edEmployeeForm.ResultEmployee;
+                service.UpdateEmployee(a);
+            }
+            else
+            {
+                MessageBox.Show("Что-то не так");
             }
         }
 

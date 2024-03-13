@@ -58,7 +58,17 @@ namespace RepositoriesSQL
 
         public void Update(Employee entity)
         {
-
+            string command = $"""
+                              UPDATE [dbo].[{TableNameEmployees}]
+                              SET [FirstName] = '{entity.Name}',
+                                  [LastName] = '{entity.LastName}',
+                                  [Email] = '{entity.Email}',
+                                  [DateOfBirth] = '{entity.DateOfBirth.Date}',
+                                  [DepartmentID] = {entity.Department.Id},
+                                  [PositionID] = {entity.Position.Id}
+                              WHERE [EmployeeID] = {entity.Id};
+                              """;
+            Execute(command);
         }
 
         public void DeleteById(int id)

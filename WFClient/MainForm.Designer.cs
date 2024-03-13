@@ -263,7 +263,7 @@
             MainDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             MainDataGridView.Location = new Point(12, 214);
             MainDataGridView.Name = "MainDataGridView";
-            MainDataGridView.Size = new Size(612, 224);
+            MainDataGridView.Size = new Size(671, 224);
             MainDataGridView.TabIndex = 3;
             // 
             // MainTextBox
@@ -277,7 +277,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(634, 450);
+            ClientSize = new Size(695, 450);
             Controls.Add(MainTextBox);
             Controls.Add(MainDataGridView);
             Controls.Add(gb_Positions);

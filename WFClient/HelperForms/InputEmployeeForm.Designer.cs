@@ -1,6 +1,6 @@
 ﻿namespace WFClient.HelperForms
 {
-    partial class InputEmployee
+    partial class InputEmployeeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -169,7 +169,7 @@
             btn_Ok.UseVisualStyleBackColor = true;
             btn_Ok.Click += btn_Ok_Click;
             // 
-            // InputEmployee
+            // InputEmployeeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -189,8 +189,8 @@
             Controls.Add(tb_LastName);
             Controls.Add(tb_Name);
             Controls.Add(tb_id);
-            Name = "InputEmployee";
-            Text = "InputEmployee";
+            Name = "InputEmployeeForm";
+            Text = "InputEmployeeForm";
             ResumeLayout(false);
             PerformLayout();
         }

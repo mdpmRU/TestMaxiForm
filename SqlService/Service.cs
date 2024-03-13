@@ -92,7 +92,7 @@ namespace DataService
 
         public void UpdateEmployee(Employee employee)
         {
-
+            _employeeRepository.Update(employee);
         }
 
         public void DeleteEmployeeById(int id)

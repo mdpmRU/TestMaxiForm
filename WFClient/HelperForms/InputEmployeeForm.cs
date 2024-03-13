@@ -11,13 +11,13 @@ using Entities;
 
 namespace WFClient.HelperForms
 {
-    public partial class InputEmployee : Form
+    public partial class InputEmployeeForm : Form
     {
         private IEnumerable<Position> _positions;
         private IEnumerable<Department> _departments;
         internal Employee ResultEmployee;
 
-        public InputEmployee(Employee employee, IEnumerable<Position> positions, IEnumerable<Department> departments)
+        public InputEmployeeForm(Employee employee, IEnumerable<Position> positions, IEnumerable<Department> departments)
         {
             _positions = positions;
             _departments = departments;
@@ -51,6 +51,7 @@ namespace WFClient.HelperForms
                 Department = (Department)cb_Depatments.SelectedItem,
                 Position = (Position)cb_Position.SelectedItem
             };
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
     }

@@ -13,7 +13,7 @@ namespace RepositoriesSQL
     {
         public IEnumerable<Department> GetAll()
         {
-            string command = $"SELECT * FROM {TableNamePositions};";
+            string command = $"SELECT * FROM {TableNameDepartments};";
             var result = ExecuteQueryWithData(command).Rows;
             var list = new List<Department>();
             foreach (DataRow row in result)
