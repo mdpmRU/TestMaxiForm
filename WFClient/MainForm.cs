@@ -13,7 +13,7 @@ using System.Runtime.Intrinsics.Arm;
 namespace WFClient
 {
     public partial class MainForm : Form
-    {
+    {//Главная форма для реализации
         private Service service;
         private DepartmentRepository _departmentRepository = new();
         private EmployeeRepository _employeeRepository = new();

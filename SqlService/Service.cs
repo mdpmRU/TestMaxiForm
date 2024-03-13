@@ -4,7 +4,7 @@ using Entities;
 namespace DataService
 {
     public class Service(IEmployeeRepository employeeRepository, IPositionRepository positionRepository, IDepartmentRepository departmentRepository)
-    {
+    {//Сервис для работы с конкретными реализациями репозиториев
         private IEmployeeRepository _employeeRepository = employeeRepository;
         private IPositionRepository _positionRepository = positionRepository;
         private IDepartmentRepository _departmentRepository = departmentRepository;

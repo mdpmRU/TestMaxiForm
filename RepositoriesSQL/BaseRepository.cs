@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace RepositoriesSQL
 {
     public abstract class BaseRepository
-    {
+    {//уже конкретная реализация необходимых методов
         internal string connectionString = $"Data Source=DESKTOP-GA8U1F2\\SQLEXPRESS;Initial Catalog=EmployeeManagement;Integrated Security=True;TrustServerCertificate=True";
         internal const string TableNamePositions = "Positions";
         internal const string TableNameDepartments = "Departments";

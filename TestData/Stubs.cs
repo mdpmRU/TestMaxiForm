@@ -2,6 +2,7 @@
 
 namespace TestData
 {
+    //тестовые данные
     public class Stubs
     {
         public static List<Department> Departments =

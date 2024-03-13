@@ -1,6 +1,6 @@
 ﻿using Create;
 using TestData;
-//"административная" программа для добавления данных
+//"административная" программа для добавления данных и хранимой процедуры
 var dbName = "EmployeeManagement";
 SqlCommands sql = new(dbName);
 sql.DropDataBase();
