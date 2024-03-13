@@ -13,9 +13,18 @@ namespace WFClient.HelperForms
 {
     public partial class InputDepartmentOrPosition : Form
     {
-        public InputDepartmentOrPosition(string name)
+        internal string nameEntity;
+        public InputDepartmentOrPosition(string nameEntity)
         {
             InitializeComponent();
+            tb_Name.Text = nameEntity;
+        }
+
+        private void btn_Ok_Click(object sender, EventArgs e)
+        {
+            nameEntity = tb_Name.Text;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

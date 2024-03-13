@@ -57,6 +57,7 @@
             btn_Ok.TabIndex = 2;
             btn_Ok.Text = "Создать";
             btn_Ok.UseVisualStyleBackColor = true;
+            btn_Ok.Click += btn_Ok_Click;
             // 
             // InputDepartmentOrPosition
             // 

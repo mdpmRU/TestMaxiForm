@@ -5,8 +5,10 @@ using RepositoriesSQL;
 using System.Data;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using WFClient.HelperForms;
 using System.Windows.Forms;
+using System.Runtime.Intrinsics.Arm;
 
 namespace WFClient
 {
@@ -52,12 +54,54 @@ namespace WFClient
 
         private void btn_Insert_Position_Click(object sender, EventArgs e)
         {
-            ParseIdTb();
+            Position pos = new Position
+            {
+                Id = 0,
+                Name = "Добавьте имя"
+            };
+            InputDepartmentOrPosition edEmployeeForm = new InputDepartmentOrPosition(pos.Name);
+            DialogResult result = edEmployeeForm.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+            if (result == DialogResult.OK)
+            {
+                pos.Name = edEmployeeForm.nameEntity;
+                service.InsertPosition(pos);
+            }
+            else
+            {
+                MessageBox.Show("Что-то не так");
+            }
         }
 
         private void btn_Update_Position_Click(object sender, EventArgs e)
         {
             ParseIdTb();
+            var pos = service.GetPositionById(ParseIdTb());
+            if (pos == null)
+            {
+                MessageBox.Show("Пользователь не найден");
+            }
+            else
+            {
+                InputDepartmentOrPosition edEmployeeForm = new InputDepartmentOrPosition(pos.Name);
+                DialogResult result = edEmployeeForm.ShowDialog();
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+                if (result == DialogResult.OK)
+                {
+                    pos.Name = edEmployeeForm.nameEntity;
+                    service.UpdatePosition(pos);
+                }
+                else
+                {
+                    MessageBox.Show("Что-то не так");
+                }
+            }
         }
 
         private void btn_Delete_Position_Click(object sender, EventArgs e)
@@ -80,12 +124,55 @@ namespace WFClient
 
         private void btn_Insert_Department_Click(object sender, EventArgs e)
         {
-            ParseIdTb();
+            Department dep = new Department
+            {
+                Id = 0,
+                Name = "Добавьте Имя"
+            };
+            InputDepartmentOrPosition edEmployeeForm = new InputDepartmentOrPosition(dep.Name);
+            DialogResult result = edEmployeeForm.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+            if (result == DialogResult.OK)
+            {
+                dep.Name = edEmployeeForm.nameEntity;
+                service.InsertDepartment(dep);
+            }
+            else
+            {
+                MessageBox.Show("Что-то не так");
+            }
+
         }
 
         private void btn_Update_Department_Click(object sender, EventArgs e)
         {
             ParseIdTb();
+            var dep = service.GetDepartmentById(ParseIdTb());
+            if (dep == null)
+            {
+                MessageBox.Show("Пользователь не найден");
+            }
+            else
+            {
+                InputDepartmentOrPosition edEmployeeForm = new InputDepartmentOrPosition(dep.Name);
+                DialogResult result = edEmployeeForm.ShowDialog();
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+                if (result == DialogResult.OK)
+                {
+                    dep.Name = edEmployeeForm.nameEntity;
+                    service.UpdateDepartment(dep);
+                }
+                else
+                {
+                    MessageBox.Show("Что-то не так");
+                }
+            }
         }
 
         private void btn_Delete_Department_Click(object sender, EventArgs e)
@@ -136,8 +223,7 @@ namespace WFClient
         private void btn_Update_Employee_Click(object sender, EventArgs e)
         {
             //TODO Добавить выбор по строке
-            var id = ParseIdTb();
-            var employee = service.GetByIdOnlyEmployee(id);
+            var employee = service.GetByIdOnlyEmployee(ParseIdTb());
             if (employee == null)
             {
                 MessageBox.Show("Пользователь не найден");
@@ -302,7 +388,7 @@ namespace WFClient
         private int ParseIdTb()
         {
             int value;
-            if (!Int32.TryParse(MainTextBox.Text,out value) || value<=0)
+            if (!Int32.TryParse(MainTextBox.Text, out value) || value <= 0)
             {
                 MessageBox.Show("Введенный id неккоректен");
                 return -1;

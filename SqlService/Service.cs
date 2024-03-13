@@ -23,17 +23,17 @@ namespace DataService
 
         public void InsertPosition(Position position)
         {
-
+            _positionRepository.Insert(position);
         }
 
         public void UpdatePosition(Position position)
         {
-
+            _positionRepository.Update(position);
         }
 
         public void DeletePositionById(int id)
         {
-
+            _positionRepository.DeleteById(id);
         }
         #endregion
 

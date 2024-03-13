@@ -43,7 +43,7 @@ namespace RepositoriesSQL
         {
             string command = $"""
                               UPDATE {TableNamePositions}
-                              SET DepartmentName = '{entity.Name}' WHERE ID = {entity.Id}
+                              SET PositionName = '{entity.Name}' WHERE ID = {entity.Id}
                               """;
             Execute(command);
         }
