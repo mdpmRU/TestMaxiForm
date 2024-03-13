@@ -13,7 +13,7 @@ namespace DataService
         #region Positions
         public Position GetPositionById(int id)
         {
-            return _positionRepository.GetById(id);
+            return id <= 0 ? null : _positionRepository.GetById(id);
         }
 
         public IEnumerable<Position> GetAllPosition()
@@ -40,7 +40,7 @@ namespace DataService
         #region Departments
         public Department GetDepartmentById(int id)
         {
-            return _departmentRepository.GetById(id);
+            return id <= 0 ? null : _departmentRepository.GetById(id);
         }
 
         public IEnumerable<Department> GetAllDepartments()
@@ -67,7 +67,7 @@ namespace DataService
         #region Employees
         public Employee GetEmployeeById(int id)
         {
-            return _employeeRepository.GetById(id);
+            return id <= 0 ? null : _employeeRepository.GetById(id);
         }
 
         public IEnumerable<Employee> GetAllEmployees()
@@ -82,7 +82,7 @@ namespace DataService
 
         public Employee GetByIdOnlyEmployee(int id)
         {
-            return _employeeRepository.GetByIdOnlyEmployee(id);
+            return id <= 0 ? null : _employeeRepository.GetByIdOnlyEmployee(id);
         }
 
         public void InsertEmployee(Employee employee)
@@ -97,6 +97,7 @@ namespace DataService
 
         public void DeleteEmployeeById(int id)
         {
+            if(id<= 0) return;
             _employeeRepository.DeleteById(id);
         }
         #endregion

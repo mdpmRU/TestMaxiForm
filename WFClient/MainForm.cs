@@ -47,9 +47,7 @@ namespace WFClient
 
         private void btn_GetById_Position_Click(object sender, EventArgs e)
         {//TODO Добавить проверку на ввод данных
-            var value = Int32.Parse(MainTextBox.Text);
-            var value2 = 1;
-            var result = service.GetPositionById(value);
+            var result = service.GetPositionById(ParseIdTb());
         }
 
         private void btn_Insert_Position_Click(object sender, EventArgs e)
@@ -76,7 +74,7 @@ namespace WFClient
         }
         private void btn_GetById_Department_Click(object sender, EventArgs e)
         {//TODO Добавить проверку на ввод данных
-
+            ParseIdTb();
         }
 
         private void btn_Insert_Department_Click(object sender, EventArgs e)
@@ -107,8 +105,7 @@ namespace WFClient
 
         private void btn_GetByID_Employee_Click(object sender, EventArgs e)
         {//TODO Добавить проверку на ввод данных
-            var value = Int32.Parse(MainTextBox.Text);
-            var item = service.GetEmployeeById(value);
+            var item = service.GetEmployeeById(ParseIdTb());
             DisplayEmployees(new List<Employee> { item });
         }
 
@@ -180,7 +177,10 @@ namespace WFClient
 
             foreach (var entity in list)
             {
-                dataTable.Rows.Add(entity.Id, entity.Name, entity.LastName, entity.Email, entity.DateOfBirth, entity.Department.Name, entity.Position.Name);
+                if (entity != null)
+                {
+                    dataTable.Rows.Add(entity.Id, entity.Name, entity.LastName, entity.Email, entity.DateOfBirth, entity.Department.Name, entity.Position.Name);
+                }
             }
 
             DisplayValueType = DataGridViewHelper.Employee;
@@ -196,7 +196,10 @@ namespace WFClient
 
             foreach (var entity in list)
             {
-                dataTable.Rows.Add(entity.Id, entity.Name);
+                if (entity != null)
+                {
+                    dataTable.Rows.Add(entity.Id, entity.Name);
+                }
             }
             DisplayValueType = DataGridViewHelper.Position;
             MainDataGridView.DataSource = dataTable;
@@ -271,6 +274,20 @@ namespace WFClient
                 btn_Delete_Employee.Enabled = false;
                 btn_Delete_Position.Enabled = true;
                 btn_Delete_Department.Enabled = false;
+            }
+        }
+
+        private int ParseIdTb()
+        {
+            int value;
+            if (!Int32.TryParse(MainTextBox.Text,out value) || value<=0)
+            {
+                MessageBox.Show("Введенный id неккоректен");
+                return -1;
+            }
+            else
+            {
+                return value;
             }
         }
         #endregion
