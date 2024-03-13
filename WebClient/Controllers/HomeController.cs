@@ -52,33 +52,17 @@ namespace WebClient.Controllers
         [HttpPost]
         public IActionResult SubmitText(string inputText)
         {
-            //ViewBag.OutputText = GetEmpl(inputText);
             int employeeId;
-            string output = "";
             if (!Int32.TryParse(inputText, out employeeId))
             {
-                output = "Что-то пошло не так. Введеное значение не распознается";
-            }
-            var lastName = service.GetEmployeeById(employeeId).LastName;
-            ViewData.Model = service.GetbyLastNameEmployees(lastName);
-            return View("Index");
-        }
-
-        private string GetEmpl(string inputText)
-        {
-            int employeeId;
-            string output = "";
-            if (!Int32.TryParse(inputText, out employeeId))
-            {
-                output = "Что-то пошло не так. Введеное значение не распознается";
+                ViewBag.OutputText = "Что-то пошло не так. Значение не распознается";
             }
             else
             {
                 var lastName = service.GetEmployeeById(employeeId).LastName;
-                IEnumerable<Employee> list = service.GetbyLastNameEmployees(lastName);
-
+                ViewData.Model = service.GetbyLastNameEmployees(lastName);
             }
-            return output;
+            return View("Index");
         }
     }
 }
