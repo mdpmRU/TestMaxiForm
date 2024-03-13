@@ -13,9 +13,45 @@ namespace WFClient.HelperForms
 {
     public partial class InputEmployee : Form
     {
-        public InputEmployee(Employee employee, List<Position> positions, List<Department> departments)
+        private IEnumerable<Position> _positions;
+        private IEnumerable<Department> _departments;
+        internal Employee ResultEmployee;
+
+        public InputEmployee(Employee employee, IEnumerable<Position> positions, IEnumerable<Department> departments)
         {
+            _positions = positions;
+            _departments = departments;
             InitializeComponent();
+            tb_id.Text = employee.Id.ToString();
+            tb_id.ReadOnly = true;
+            tb_Name.Text = employee.Name;
+            tb_LastName.Text = employee.LastName;
+            tb_Email.Text = employee.Email;
+            dt_DayBirth.Value = employee.DateOfBirth.Date;
+
+
+            cb_Depatments.DataSource = _departments;
+            cb_Depatments.SelectedIndex = employee.Department.Id;
+            cb_Depatments.DisplayMember = "Name";
+
+            cb_Position.DataSource = _positions;
+            cb_Position.SelectedIndex = employee.Position.Id;
+            cb_Position.DisplayMember = "Name";
+        }
+
+        private void btn_Ok_Click(object sender, EventArgs e)
+        {
+            ResultEmployee = new Employee
+            {
+                Id = int.Parse(tb_id.Text),
+                Name = tb_Name.Text,
+                LastName = tb_LastName.Text,
+                Email = tb_Email.Text,
+                DateOfBirth = dt_DayBirth.Value,
+                Department = (Department)cb_Depatments.SelectedItem,
+                Position = (Position)cb_Position.SelectedItem
+            };
+            this.Close();
         }
     }
 }

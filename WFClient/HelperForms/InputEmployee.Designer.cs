@@ -37,11 +37,12 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            comboBox1 = new ComboBox();
+            dt_DayBirth = new DateTimePicker();
+            cb_Depatments = new ComboBox();
             label6 = new Label();
             label7 = new Label();
-            comboBox2 = new ComboBox();
+            cb_Position = new ComboBox();
+            btn_Ok = new Button();
             SuspendLayout();
             // 
             // tb_id
@@ -117,20 +118,20 @@
             label5.TabIndex = 10;
             label5.Text = "День рождения";
             // 
-            // dateTimePicker1
+            // dt_DayBirth
             // 
-            dateTimePicker1.Location = new Point(12, 203);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 11;
+            dt_DayBirth.Location = new Point(12, 203);
+            dt_DayBirth.Name = "dt_DayBirth";
+            dt_DayBirth.Size = new Size(200, 23);
+            dt_DayBirth.TabIndex = 11;
             // 
-            // comboBox1
+            // cb_Depatments
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 247);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 12;
+            cb_Depatments.FormattingEnabled = true;
+            cb_Depatments.Location = new Point(12, 247);
+            cb_Depatments.Name = "cb_Depatments";
+            cb_Depatments.Size = new Size(121, 23);
+            cb_Depatments.TabIndex = 12;
             // 
             // label6
             // 
@@ -150,24 +151,35 @@
             label7.TabIndex = 15;
             label7.Text = "Должность";
             // 
-            // comboBox2
+            // cb_Position
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(12, 291);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 14;
+            cb_Position.FormattingEnabled = true;
+            cb_Position.Location = new Point(12, 291);
+            cb_Position.Name = "cb_Position";
+            cb_Position.Size = new Size(121, 23);
+            cb_Position.TabIndex = 14;
+            // 
+            // btn_Ok
+            // 
+            btn_Ok.Location = new Point(69, 390);
+            btn_Ok.Name = "btn_Ok";
+            btn_Ok.Size = new Size(75, 23);
+            btn_Ok.TabIndex = 16;
+            btn_Ok.Text = "Создать";
+            btn_Ok.UseVisualStyleBackColor = true;
+            btn_Ok.Click += btn_Ok_Click;
             // 
             // InputEmployee
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(387, 450);
+            ClientSize = new Size(223, 450);
+            Controls.Add(btn_Ok);
             Controls.Add(label7);
-            Controls.Add(comboBox2);
+            Controls.Add(cb_Position);
             Controls.Add(label6);
-            Controls.Add(comboBox1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(cb_Depatments);
+            Controls.Add(dt_DayBirth);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -194,10 +206,11 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private DateTimePicker dateTimePicker1;
-        private ComboBox comboBox1;
+        private DateTimePicker dt_DayBirth;
+        private ComboBox cb_Depatments;
         private Label label6;
         private Label label7;
-        private ComboBox comboBox2;
+        private ComboBox cb_Position;
+        private Button btn_Ok;
     }
 }

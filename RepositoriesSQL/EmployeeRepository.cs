@@ -46,6 +46,7 @@ namespace RepositoriesSQL
                               JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
                               WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id}
                               """;
+            //TODO Добавить проверку на Null
             var result = ExecuteQueryWithData(command).Rows[0];
             return ParseEmployee(result);
         }

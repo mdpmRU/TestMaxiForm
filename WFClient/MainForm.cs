@@ -4,6 +4,9 @@ using Entities;
 using RepositoriesSQL;
 using System.Data;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using WFClient.HelperForms;
+using System.Windows.Forms;
 
 namespace WFClient
 {
@@ -24,7 +27,7 @@ namespace WFClient
             set
             {
                 displayValueType = value;
-                BlockButton();
+                BlockButton(value);
             }
         }
 
@@ -44,9 +47,9 @@ namespace WFClient
 
         private void btn_GetById_Position_Click(object sender, EventArgs e)
         {//TODO Добавить проверку на ввод данных
-            //var value = Int32.Parse(MainTextBox.Text);
+            var value = Int32.Parse(MainTextBox.Text);
             var value2 = 1;
-            var result = service.GetPositionById(value2);
+            var result = service.GetPositionById(value);
         }
 
         private void btn_Insert_Position_Click(object sender, EventArgs e)
@@ -56,10 +59,7 @@ namespace WFClient
 
         private void btn_Update_Position_Click(object sender, EventArgs e)
         {
-            if (displayValueType == DataGridViewHelper.Position)
-            {
-                
-            }
+
         }
 
         private void btn_Delete_Position_Click(object sender, EventArgs e)
@@ -107,7 +107,9 @@ namespace WFClient
 
         private void btn_GetByID_Employee_Click(object sender, EventArgs e)
         {//TODO Добавить проверку на ввод данных
-            var item = service.GetEmployeeById(1);
+            var value = Int32.Parse(MainTextBox.Text);
+            var item = service.GetEmployeeById(value);
+            DisplayEmployees(new List<Employee> { item });
         }
 
         private void btn_getByLastName_Employee_Click(object sender, EventArgs e)
@@ -123,7 +125,15 @@ namespace WFClient
 
         private void btn_Update_Employee_Click(object sender, EventArgs e)
         {
+            //TODO Добавить выбор по строке
+            var id = int.Parse(MainDataGridView.CurrentCell.Value.ToString());
 
+            InputEmployee edEmployee = new InputEmployee(service.GetByIdOnlyEmployee(id), service.GetAllPosition(),service.GetAllDepartments());
+            DialogResult result = edEmployee.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
         }
 
         private void btn_Delete_Employee_Click(object sender, EventArgs e)
@@ -133,6 +143,7 @@ namespace WFClient
 
         private void DisplayEmployees(IEnumerable<Employee> list)
         {
+            //TODO Добавить блокировку на изменения
             DataTable dataTable = new();
             dataTable.Columns.Add("Id", typeof(int));
             dataTable.Columns.Add("Name", typeof(string));
@@ -152,7 +163,7 @@ namespace WFClient
         }
 
         private void DisplayPositions(IEnumerable<Position> list)
-        {
+        {//TODO Добавить блокировку на изменения
             DataTable dataTable = new();
 
             dataTable.Columns.Add("Id", typeof(int));
@@ -167,7 +178,7 @@ namespace WFClient
         }
 
         private void DisplayDepartments(IEnumerable<Department> list)
-        {
+        {//TODO Добавить блокировку на изменения
             DataTable dataTable = new();
 
             dataTable.Columns.Add("Id", typeof(int));
@@ -183,7 +194,7 @@ namespace WFClient
 
         private void BlockButton(DataGridViewHelper value)
         {
-
+            //TODO Добавить реализацию на блокирование кнопок
         }
     }
 }

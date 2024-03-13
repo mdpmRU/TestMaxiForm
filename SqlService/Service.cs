@@ -80,6 +80,11 @@ namespace DataService
             return _employeeRepository.GetByLastName(lastName);
         }
 
+        public Employee GetByIdOnlyEmployee(int id)
+        {
+            return _employeeRepository.GetByIdOnlyEmployee(id);
+        }
+
         public void InsertEmployee(Employee employee)
         {
 
