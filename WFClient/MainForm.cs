@@ -1,7 +1,9 @@
+using System.ComponentModel;
 using DataService;
 using Entities;
 using RepositoriesSQL;
 using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace WFClient
 {
@@ -12,9 +14,24 @@ namespace WFClient
         private EmployeeRepository _employeeRepository = new();
         private PositionRepository _positionRepository = new();
 
+        private DataGridViewHelper displayValueType;
+        internal DataGridViewHelper DisplayValueType
+        {
+            get
+            {
+                return displayValueType;
+            }
+            set
+            {
+                displayValueType = value;
+                BlockButton();
+            }
+        }
+
         public MainForm()
         {
             this.service = new(_employeeRepository, _positionRepository, _departmentRepository);
+            this.DisplayValueType = DataGridViewHelper.Default;
             InitializeComponent();
         }
 
@@ -34,12 +51,15 @@ namespace WFClient
 
         private void btn_Insert_Position_Click(object sender, EventArgs e)
         {
-            //service.InsertPosition();
+
         }
 
         private void btn_Update_Position_Click(object sender, EventArgs e)
         {
-
+            if (displayValueType == DataGridViewHelper.Position)
+            {
+                
+            }
         }
 
         private void btn_Delete_Position_Click(object sender, EventArgs e)
@@ -61,12 +81,14 @@ namespace WFClient
 
         private void btn_Insert_Department_Click(object sender, EventArgs e)
         {
-            var a = MainDataGridView.SelectedCells;
         }
 
         private void btn_Update_Department_Click(object sender, EventArgs e)
         {
+            if (displayValueType == DataGridViewHelper.Department)
+            {
 
+            }
         }
 
         private void btn_Delete_Department_Click(object sender, EventArgs e)
@@ -106,14 +128,12 @@ namespace WFClient
 
         private void btn_Delete_Employee_Click(object sender, EventArgs e)
         {
-
         }
         #endregion
 
         private void DisplayEmployees(IEnumerable<Employee> list)
         {
             DataTable dataTable = new();
-
             dataTable.Columns.Add("Id", typeof(int));
             dataTable.Columns.Add("Name", typeof(string));
             dataTable.Columns.Add("LastName", typeof(string));
@@ -127,6 +147,7 @@ namespace WFClient
                 dataTable.Rows.Add(entity.Id, entity.Name, entity.LastName, entity.Email, entity.DateOfBirth, entity.Department.Name, entity.Position.Name);
             }
 
+            DisplayValueType = DataGridViewHelper.Employee;
             MainDataGridView.DataSource = dataTable;
         }
 
@@ -141,7 +162,7 @@ namespace WFClient
             {
                 dataTable.Rows.Add(entity.Id, entity.Name);
             }
-
+            DisplayValueType = DataGridViewHelper.Position;
             MainDataGridView.DataSource = dataTable;
         }
 
@@ -156,8 +177,13 @@ namespace WFClient
             {
                 dataTable.Rows.Add(entity.Id, entity.Name);
             }
-
+            DisplayValueType = DataGridViewHelper.Position;
             MainDataGridView.DataSource = dataTable;
+        }
+
+        private void BlockButton(DataGridViewHelper value)
+        {
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Entities;
 using Microsoft.VisualBasic;
 using System.Data;
+using System.Reflection.Metadata.Ecma335;
 
 namespace RepositoriesSQL
 {
@@ -27,12 +28,7 @@ namespace RepositoriesSQL
                               JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
                               """;
             var result = ExecuteQueryWithData(command).Rows;
-            var list = new List<Employee>();
-            foreach (DataRow row in result)
-            {
-                list.Add(ParseEmployee(row));
-            }
-            return list;
+            return (from DataRow row in result select ParseEmployee(row)).ToList();
         }
 
         public Employee GetById(int id)
@@ -50,17 +46,8 @@ namespace RepositoriesSQL
                               JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
                               WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id}
                               """;
-            var result = ExecuteQueryWithData(command).Rows[0].ItemArray;
-            return new Employee
-            {
-                Id = Int32.Parse(result[0].ToString()),
-                Name = result[1].ToString(),
-                LastName = result[2].ToString(),
-                Email = result[3].ToString(),
-                DateOfBirth = DateTime.Parse(result[4].ToString()),
-                Department = new Department() { Id = 0, Name = result[5].ToString() },
-                Position = new Position() { Id = 0, Name = result[6].ToString() }
-            };
+            var result = ExecuteQueryWithData(command).Rows[0];
+            return ParseEmployee(result);
         }
 
         public void Insert(Employee entity)
@@ -85,12 +72,17 @@ namespace RepositoriesSQL
                                 '{lastName}'
                              """;
             var result = ExecuteQueryWithData(command).Rows;
-            var list = new List<Employee>();
-            foreach (DataRow row in result)
-            {
-                list.Add(ParseEmployee(row));
-            }
-            return list;
+            return (from DataRow row in result select ParseEmployee(row)).ToList();
+        }
+
+        public Employee GetByIdOnlyEmployee(int id)
+        {
+            string command = $"""
+                              SELECT * FROM {TableNameEmployees}
+                              WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id};
+                              """;
+            var result = ExecuteQueryWithData(command).Rows[0];
+            return ParseEmployee(result);
         }
 
         private Employee ParseEmployee(DataRow result)

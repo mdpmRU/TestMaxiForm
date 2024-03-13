@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entities;
 
 namespace WFClient.HelperForms
 {
-    public partial class InputDepartment : Form
+    public partial class InputDepartmentOrPosition : Form
     {
-        public InputDepartment()
+        public InputDepartmentOrPosition(string name)
         {
             InitializeComponent();
         }

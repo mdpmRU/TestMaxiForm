@@ -10,5 +10,7 @@ namespace Contracts
     public interface IEmployeeRepository : IBaseRepository<Employee>
     {
         public IEnumerable<Employee> GetByLastName(string lastName);
+
+        public Employee GetByIdOnlyEmployee(int id);
     }
 }
