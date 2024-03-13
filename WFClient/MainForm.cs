@@ -19,25 +19,10 @@ namespace WFClient
         private EmployeeRepository _employeeRepository = new();
         private PositionRepository _positionRepository = new();
 
-        private DataGridViewHelper displayValueType;
-        internal DataGridViewHelper DisplayValueType
-        {
-            get
-            {
-                return displayValueType;
-            }
-            set
-            {
-                displayValueType = value;
-                //BlockButtons(value);
-            }
-        }
-
         public MainForm()
         {
             service = new(_employeeRepository, _positionRepository, _departmentRepository);
             InitializeComponent();
-            DisplayValueType = DataGridViewHelper.Default;
         }
 
         #region Positions
@@ -116,6 +101,7 @@ namespace WFClient
             var list = service.GetAllDepartments();
             DisplayDepartments(list);
         }
+
         private void btn_GetById_Department_Click(object sender, EventArgs e)
         {//TODO Добавить проверку на ввод данных
             var item = service.GetDepartmentById(ParseIdTb());
@@ -144,7 +130,6 @@ namespace WFClient
             {
                 MessageBox.Show("Что-то не так");
             }
-
         }
 
         private void btn_Update_Department_Click(object sender, EventArgs e)
@@ -179,7 +164,6 @@ namespace WFClient
         {
             service.DeleteDepartmentsById(ParseIdTb());
         }
-
         #endregion
 
         #region Employees
@@ -245,7 +229,6 @@ namespace WFClient
                     MessageBox.Show("Что-то не так");
                 }
             }
-
         }
 
         private void btn_Delete_Employee_Click(object sender, EventArgs e)
@@ -255,10 +238,9 @@ namespace WFClient
         }
         #endregion
 
-        #region MyRegion
+        #region PrivateMethods
         private void DisplayEmployees(IEnumerable<Employee> list)
         {
-            //TODO Добавить блокировку на изменения
             DataTable dataTable = new();
             dataTable.Columns.Add("Id", typeof(int));
             dataTable.Columns.Add("Name", typeof(string));
@@ -279,13 +261,11 @@ namespace WFClient
                     MessageBox.Show("Данные не найдены");
                 }
             }
-
-            DisplayValueType = DataGridViewHelper.Employee;
             MainDataGridView.DataSource = dataTable;
         }
 
         private void DisplayPositions(IEnumerable<Position> list)
-        {//TODO Добавить блокировку на изменения
+        {
             DataTable dataTable = new();
 
             dataTable.Columns.Add("Id", typeof(int));
@@ -302,12 +282,11 @@ namespace WFClient
                     MessageBox.Show("Данные не найдены");
                 }
             }
-            DisplayValueType = DataGridViewHelper.Position;
             MainDataGridView.DataSource = dataTable;
         }
 
         private void DisplayDepartments(IEnumerable<Department> list)
-        {//TODO Добавить блокировку на изменения
+        {
             DataTable dataTable = new();
 
             dataTable.Columns.Add("Id", typeof(int));
@@ -324,66 +303,8 @@ namespace WFClient
                     MessageBox.Show("Данные не найдены");
                 }
             }
-            DisplayValueType = DataGridViewHelper.Department;
             MainDataGridView.DataSource = dataTable;
         }
-
-        //private void BlockButtons(DataGridViewHelper value)
-        //{
-        //    if (value == DataGridViewHelper.Default)
-        //    {
-        //        btn_GetAll_Departments.Enabled = true;
-        //        btn_GetAll_Position.Enabled = true;
-        //        btn_GetAll_Employees.Enabled = true;
-
-        //        btn_GetById_Department.Enabled = true;
-        //        btn_GetById_Position.Enabled = true;
-        //        btn_GetByID_Employee.Enabled = true;
-        //        btn_getByLastName_Employee.Enabled = true;
-
-        //        btn_Insert_Employee.Enabled = true;
-        //        btn_Insert_Position.Enabled = true;
-        //        btn_Insert_Department.Enabled = true;
-
-        //        btn_Update_Employee.Enabled = false;
-        //        btn_Delete_Employee.Enabled = false;
-        //        btn_Update_Position.Enabled = false;
-        //        btn_Delete_Position.Enabled = false;
-        //        btn_Update_Department.Enabled = false;
-        //        btn_Delete_Department.Enabled = false;
-        //    }
-        //    if (value == DataGridViewHelper.Employee)
-        //    {
-        //        btn_Update_Employee.Enabled = true;
-        //        btn_Update_Position.Enabled = false;
-        //        btn_Update_Department.Enabled = false;
-
-        //        btn_Delete_Employee.Enabled = true;
-        //        btn_Delete_Position.Enabled = false;
-        //        btn_Delete_Department.Enabled = false;
-        //    }
-        //    if (value == DataGridViewHelper.Department)
-        //    {
-        //        btn_Update_Employee.Enabled = false;
-        //        btn_Update_Position.Enabled = false;
-        //        btn_Update_Department.Enabled = true;
-
-        //        btn_Delete_Employee.Enabled = false;
-        //        btn_Delete_Position.Enabled = false;
-        //        btn_Delete_Department.Enabled = true;
-        //    }
-
-        //    if (value == DataGridViewHelper.Position)
-        //    {
-        //        btn_Update_Employee.Enabled = false;
-        //        btn_Update_Position.Enabled = true;
-        //        btn_Update_Department.Enabled = false;
-
-        //        btn_Delete_Employee.Enabled = false;
-        //        btn_Delete_Position.Enabled = true;
-        //        btn_Delete_Department.Enabled = false;
-        //    }
-        //}
 
         private int ParseIdTb()
         {
@@ -399,6 +320,5 @@ namespace WFClient
             }
         }
         #endregion
-
     }
 }

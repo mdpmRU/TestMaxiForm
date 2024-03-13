@@ -5,7 +5,6 @@ namespace DataService
 {
     public class Service(IEmployeeRepository employeeRepository, IPositionRepository positionRepository, IDepartmentRepository departmentRepository)
     {
-        //TODO По хорошему надо развести
         private IEmployeeRepository _employeeRepository = employeeRepository;
         private IPositionRepository _positionRepository = positionRepository;
         private IDepartmentRepository _departmentRepository = departmentRepository;
