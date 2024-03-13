@@ -14,7 +14,7 @@ namespace RepositoriesSQL
             var list = new List<Position>();
             foreach (DataRow row in result)
             {
-                list.Add(ParsePosition(row));
+                list.Add(Parse(row));
             }
             return list;
         }
@@ -22,8 +22,15 @@ namespace RepositoriesSQL
         public Position GetById(int id)
         {
             string command = $"SELECT * FROM {TableNamePositions} WHERE ID = {id};";
-            var result = ExecuteQueryWithData(command).Rows[0];
-            return ParsePosition(result);
+            var queryResult = ExecuteQueryWithData(command);
+            if (queryResult.Rows.Count != 0)
+            {
+                return Parse(queryResult.Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void Insert(Position entity)
@@ -47,7 +54,7 @@ namespace RepositoriesSQL
             Execute(command);
         }
 
-        private Position ParsePosition(DataRow result)
+        private Position Parse(DataRow result)
         {
             return new Position() { Id = Int32.Parse(result[0].ToString()), Name = result[1].ToString() };
         }

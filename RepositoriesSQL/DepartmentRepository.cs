@@ -18,7 +18,7 @@ namespace RepositoriesSQL
             var list = new List<Department>();
             foreach (DataRow row in result)
             {
-                list.Add(ParseDepartment(row));
+                list.Add(Parse(row));
             }
             return list;
         }
@@ -26,8 +26,15 @@ namespace RepositoriesSQL
         public Department GetById(int id)
         {
             string command = $"SELECT * FROM {TableNameDepartments} WHERE ID = {id};";
-            var result = ExecuteQueryWithData(command).Rows[0];
-            return ParseDepartment(result);
+            var queryResult = ExecuteQueryWithData(command);
+            if (queryResult.Rows.Count != 0)
+            {
+                return Parse(queryResult.Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void Insert(Department entity)
@@ -51,7 +58,7 @@ namespace RepositoriesSQL
             Execute(command);
         }
 
-        private Department ParseDepartment(DataRow result)
+        private Department Parse(DataRow result)
         {
             return new Department() { Id = Int32.Parse(result[0].ToString()), Name = result[1].ToString() };
         }

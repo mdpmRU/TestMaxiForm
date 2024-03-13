@@ -28,7 +28,7 @@ namespace RepositoriesSQL
                               JOIN [dbo].[Positions] ON [dbo].[{TableNameEmployees}].[PositionID] = [dbo].[Positions].[ID]
                               """;
             var result = ExecuteQueryWithData(command).Rows;
-            return (from DataRow row in result select ParseEmployee(row)).ToList();
+            return (from DataRow row in result select Parse(row)).ToList();
         }
 
         public Employee GetById(int id)
@@ -47,8 +47,15 @@ namespace RepositoriesSQL
                               WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id}
                               """;
             //TODO Добавить проверку на Null
-            var result = ExecuteQueryWithData(command).Rows[0];
-            return ParseEmployee(result);
+            var queryResult = ExecuteQueryWithData(command);
+            if (queryResult.Rows.Count != 0)
+            {
+                return Parse(queryResult.Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void Insert(Employee entity)
@@ -91,7 +98,7 @@ namespace RepositoriesSQL
                                 '{lastName}'
                              """;
             var result = ExecuteQueryWithData(command).Rows;
-            return (from DataRow row in result select ParseEmployee(row)).ToList();
+            return (from DataRow row in result select Parse(row)).ToList();
         }
 
         public Employee GetByIdOnlyEmployee(int id)
@@ -101,10 +108,10 @@ namespace RepositoriesSQL
                               WHERE [dbo].[{TableNameEmployees}].[EmployeeID] = {id};
                               """;
             var result = ExecuteQueryWithData(command).Rows[0];
-            return ParseEmployee(result);
+            return Parse(result);
         }
 
-        private Employee ParseEmployee(DataRow result)
+        private Employee Parse(DataRow result)
         {
             return new Employee
             {

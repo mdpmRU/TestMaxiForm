@@ -181,6 +181,10 @@ namespace WFClient
                 {
                     dataTable.Rows.Add(entity.Id, entity.Name, entity.LastName, entity.Email, entity.DateOfBirth, entity.Department.Name, entity.Position.Name);
                 }
+                else
+                {
+                    MessageBox.Show("Данные не найдены");
+                }
             }
 
             DisplayValueType = DataGridViewHelper.Employee;
@@ -199,6 +203,10 @@ namespace WFClient
                 if (entity != null)
                 {
                     dataTable.Rows.Add(entity.Id, entity.Name);
+                }
+                else
+                {
+                    MessageBox.Show("Данные не найдены");
                 }
             }
             DisplayValueType = DataGridViewHelper.Position;
