@@ -27,15 +27,15 @@ namespace WFClient
             set
             {
                 displayValueType = value;
-                BlockButton(value);
+                BlockButtons(value);
             }
         }
 
         public MainForm()
         {
             service = new(_employeeRepository, _positionRepository, _departmentRepository);
-            DisplayValueType = DataGridViewHelper.Default;
             InitializeComponent();
+            DisplayValueType = DataGridViewHelper.Default;
         }
 
         #region Positions
@@ -165,6 +165,7 @@ namespace WFClient
         }
         #endregion
 
+        #region MyRegion
         private void DisplayEmployees(IEnumerable<Employee> list)
         {
             //TODO Добавить блокировку на изменения
@@ -212,13 +213,67 @@ namespace WFClient
             {
                 dataTable.Rows.Add(entity.Id, entity.Name);
             }
-            DisplayValueType = DataGridViewHelper.Position;
+            DisplayValueType = DataGridViewHelper.Department;
             MainDataGridView.DataSource = dataTable;
         }
 
-        private void BlockButton(DataGridViewHelper value)
+        private void BlockButtons(DataGridViewHelper value)
         {
-            //TODO Добавить реализацию на блокирование кнопок
+            if (value == DataGridViewHelper.Default)
+            {
+                btn_GetAll_Departments.Enabled = true;
+                btn_GetAll_Position.Enabled = true;
+                btn_GetAll_Employees.Enabled = true;
+
+                btn_GetById_Department.Enabled = true;
+                btn_GetById_Position.Enabled = true;
+                btn_GetByID_Employee.Enabled = true;
+                btn_getByLastName_Employee.Enabled = true;
+
+                btn_Insert_Employee.Enabled = true;
+                btn_Insert_Position.Enabled = true;
+                btn_Insert_Department.Enabled = true;
+
+                btn_Update_Employee.Enabled = false;
+                btn_Delete_Employee.Enabled = false;
+                btn_Update_Position.Enabled = false;
+                btn_Delete_Position.Enabled = false;
+                btn_Update_Department.Enabled = false;
+                btn_Delete_Department.Enabled = false;
+            }
+            if (value == DataGridViewHelper.Employee)
+            {
+                btn_Update_Employee.Enabled = true;
+                btn_Update_Position.Enabled = false;
+                btn_Update_Department.Enabled = false;
+
+                btn_Delete_Employee.Enabled = true;
+                btn_Delete_Position.Enabled = false;
+                btn_Delete_Department.Enabled = false;
+            }
+            if (value == DataGridViewHelper.Department)
+            {
+                btn_Update_Employee.Enabled = false;
+                btn_Update_Position.Enabled = false;
+                btn_Update_Department.Enabled = true;
+
+                btn_Delete_Employee.Enabled = false;
+                btn_Delete_Position.Enabled = false;
+                btn_Delete_Department.Enabled = true;
+            }
+
+            if (value == DataGridViewHelper.Position)
+            {
+                btn_Update_Employee.Enabled = false;
+                btn_Update_Position.Enabled = true;
+                btn_Update_Department.Enabled = false;
+
+                btn_Delete_Employee.Enabled = false;
+                btn_Delete_Position.Enabled = true;
+                btn_Delete_Department.Enabled = false;
+            }
         }
+        #endregion
+
     }
 }

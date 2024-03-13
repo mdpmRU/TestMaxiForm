@@ -72,6 +72,7 @@
             // 
             // btn_Delete_Employee
             // 
+            btn_Delete_Employee.Enabled = false;
             btn_Delete_Employee.Location = new Point(6, 167);
             btn_Delete_Employee.Name = "btn_Delete_Employee";
             btn_Delete_Employee.Size = new Size(188, 23);
@@ -82,6 +83,7 @@
             // 
             // btn_Update_Employee
             // 
+            btn_Update_Employee.Enabled = false;
             btn_Update_Employee.Location = new Point(6, 138);
             btn_Update_Employee.Name = "btn_Update_Employee";
             btn_Update_Employee.Size = new Size(188, 23);
@@ -92,6 +94,7 @@
             // 
             // btn_getByLastName_Employee
             // 
+            btn_getByLastName_Employee.Enabled = false;
             btn_getByLastName_Employee.Location = new Point(6, 80);
             btn_getByLastName_Employee.Name = "btn_getByLastName_Employee";
             btn_getByLastName_Employee.Size = new Size(188, 23);
@@ -102,6 +105,7 @@
             // 
             // btn_Insert_Employee
             // 
+            btn_Insert_Employee.Enabled = false;
             btn_Insert_Employee.Location = new Point(6, 109);
             btn_Insert_Employee.Name = "btn_Insert_Employee";
             btn_Insert_Employee.Size = new Size(188, 23);
@@ -112,6 +116,7 @@
             // 
             // btn_GetByID_Employee
             // 
+            btn_GetByID_Employee.Enabled = false;
             btn_GetByID_Employee.Location = new Point(6, 51);
             btn_GetByID_Employee.Name = "btn_GetByID_Employee";
             btn_GetByID_Employee.Size = new Size(188, 23);
@@ -122,6 +127,7 @@
             // 
             // btn_GetAll_Employees
             // 
+            btn_GetAll_Employees.Enabled = false;
             btn_GetAll_Employees.Location = new Point(6, 22);
             btn_GetAll_Employees.Name = "btn_GetAll_Employees";
             btn_GetAll_Employees.Size = new Size(188, 23);
@@ -146,6 +152,7 @@
             // 
             // btn_Delete_Department
             // 
+            btn_Delete_Department.Enabled = false;
             btn_Delete_Department.Location = new Point(6, 138);
             btn_Delete_Department.Name = "btn_Delete_Department";
             btn_Delete_Department.Size = new Size(188, 23);
@@ -156,6 +163,7 @@
             // 
             // btn_Update_Department
             // 
+            btn_Update_Department.Enabled = false;
             btn_Update_Department.Location = new Point(6, 109);
             btn_Update_Department.Name = "btn_Update_Department";
             btn_Update_Department.Size = new Size(188, 23);
@@ -166,6 +174,7 @@
             // 
             // btn_Insert_Department
             // 
+            btn_Insert_Department.Enabled = false;
             btn_Insert_Department.Location = new Point(6, 80);
             btn_Insert_Department.Name = "btn_Insert_Department";
             btn_Insert_Department.Size = new Size(188, 23);
@@ -176,6 +185,7 @@
             // 
             // btn_GetById_Department
             // 
+            btn_GetById_Department.Enabled = false;
             btn_GetById_Department.Location = new Point(6, 51);
             btn_GetById_Department.Name = "btn_GetById_Department";
             btn_GetById_Department.Size = new Size(188, 23);
@@ -186,6 +196,7 @@
             // 
             // btn_GetAll_Departments
             // 
+            btn_GetAll_Departments.Enabled = false;
             btn_GetAll_Departments.Location = new Point(6, 22);
             btn_GetAll_Departments.Name = "btn_GetAll_Departments";
             btn_GetAll_Departments.Size = new Size(188, 23);
@@ -210,6 +221,7 @@
             // 
             // btn_Delete_Position
             // 
+            btn_Delete_Position.Enabled = false;
             btn_Delete_Position.Location = new Point(6, 138);
             btn_Delete_Position.Name = "btn_Delete_Position";
             btn_Delete_Position.Size = new Size(188, 23);
@@ -220,6 +232,7 @@
             // 
             // btn_Update_Position
             // 
+            btn_Update_Position.Enabled = false;
             btn_Update_Position.Location = new Point(6, 109);
             btn_Update_Position.Name = "btn_Update_Position";
             btn_Update_Position.Size = new Size(188, 23);
@@ -230,6 +243,7 @@
             // 
             // btn_Insert_Position
             // 
+            btn_Insert_Position.Enabled = false;
             btn_Insert_Position.Location = new Point(6, 80);
             btn_Insert_Position.Name = "btn_Insert_Position";
             btn_Insert_Position.Size = new Size(188, 23);
@@ -240,6 +254,7 @@
             // 
             // btn_GetById_Position
             // 
+            btn_GetById_Position.Enabled = false;
             btn_GetById_Position.Location = new Point(6, 51);
             btn_GetById_Position.Name = "btn_GetById_Position";
             btn_GetById_Position.Size = new Size(188, 23);
@@ -250,6 +265,7 @@
             // 
             // btn_GetAll_Position
             // 
+            btn_GetAll_Position.Enabled = false;
             btn_GetAll_Position.Location = new Point(6, 22);
             btn_GetAll_Position.Name = "btn_GetAll_Position";
             btn_GetAll_Position.Size = new Size(188, 23);
