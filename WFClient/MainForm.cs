@@ -33,8 +33,8 @@ namespace WFClient
 
         public MainForm()
         {
-            this.service = new(_employeeRepository, _positionRepository, _departmentRepository);
-            this.DisplayValueType = DataGridViewHelper.Default;
+            service = new(_employeeRepository, _positionRepository, _departmentRepository);
+            DisplayValueType = DataGridViewHelper.Default;
             InitializeComponent();
         }
 

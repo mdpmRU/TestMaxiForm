@@ -1,12 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-
-@{
-    ViewData["Title"] = "Home Page";
-}
-
+@model IEnumerable<Entities.Employee>
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
@@ -15,9 +10,43 @@
         <input type="text" name="inputText" />
         <button type="submit">Submit</button>
     </form>
-
-    @if (ViewBag.OutputText != null)
+    
+    @if (Model != null)
     {
-        <p>Entered Text: @ViewBag.OutputText</p>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    Номер:
+                    @item.Id;
+                </td>
+                <td>
+                    Имя:
+                    @item.Name;
+                </td>
+                <td>
+                    Фамилия:
+                    @item.LastName;
+                </td>
+                <td>
+                    Почта: 
+                    @item.Email;
+                </td>
+                <td>
+                    Дата рождения:
+                    @item.DateOfBirth.Date;
+                </td>
+                <td>
+                    Отдел: 
+                    @item.Department.Name;
+                </td>
+                <td>
+                    Должность:
+                    @item.Position.Name;
+                </td>
+                <br />
+            </tr>
+        }
     }
+
 </div>
